@@ -1,0 +1,66 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="ManagerProduct.MainPage">
+    <!-- trong scg o tren con co Dictionary ObservableCollection(tu dong thong bao khi du lieu thay doi) HashSet-->
+    <?HorizontalStackLayout la ngang?>
+<!--             xmlns:local="clr-namespace:MarkupExtensions" mac dinh tinh nhu la muon co font =18 hay gi do
+                 FontSize="{x:Static Member=local:AppConstants.NormalFontSize}" />
+   
+    
+-->
+    <ScrollView>
+
+
+        <VerticalStackLayout Spacing="15" Padding="20">
+            <Grid RowDefinitions="Auto,Auto,Auto">
+                <Button Text="productList 1"
+            Clicked="Button_Clicked"
+            Grid.Column="0" />
+
+                <Button Text="productList 2"
+            Clicked="Button_Clicked"
+            Grid.Column="1" />
+
+                <Button Text="productList 3"
+            Clicked="Button_Clicked"
+            Grid.Column="2" />
+            </Grid>
+
+            <Button Text="productList" Clicked="Button_Clicked"/>
+
+            
+            <ScrollView>
+
+                <StackLayout Padding="20" Spacing="10">
+
+                    <Label Text="Name" />
+                    <Entry x:Name="Name"/>
+                    <Label Text="Category" />
+                    <Entry x:Name="Category"/>
+                    <Label Text="Price" />
+                    <Entry x:Name="Price"/>
+                    <Label Text="Stock" />
+                    <Entry x:Name="Stock"/>
+
+                    <!--     <Label Text="Name" />
+            <Button Text="import photo" Clicked="Button_ImportImage"/>
+            <Image x:Name="ProductImage" 
+                   WidthRequest="200" 
+                   HeightRequest="200"
+                   Aspect="AspectFit
+                            -->
+
+                    <Label Text="Description" />
+                    <Entry x:Name="Description"/>
+                    <Button x:Name="AddButton"
+                    Text="Add"
+                    Clicked="AddButton_Clicked"/>
+                </StackLayout>
+            </ScrollView>
+        </VerticalStackLayout>
+    </ScrollView>
+
+
+
+</ContentPage>

@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="ManagerProduct.View.ProductView"
+             xmlns:local="clr-namespace:ManagerProduct.Model"
+             Title="Danh sách sản phẩm">
+    <VerticalStackLayout>
+        <CollectionView x:Name="ProductCollectionView"
+                        ItemsSource="{Binding Product}"
+                        EmptyView=" chưa có sản phẩm ">
+            <CollectionView.ItemTemplate>
+                <DataTemplate x:DataType="local:Product">
+
+                    <Frame BorderColor="LightGray" CornerRadius="10" Padding="10" Margin="5">
+                        <VerticalStackLayout>
+                           <!-- <Image Source="{Binding ImageUrl}" HeightRequest="150" Aspect="AspectFill"/> -->
+                            <Label Text="{Binding Name}" FontAttributes="Bold" FontSize="20"/>
+                            <Label Text="{Binding Category}" FontSize="16" TextColor="Gray"/>
+                            <Label Text="{Binding Price, StringFormat='Price: {0:C}'}" FontSize="16"/>
+                            <Label Text="{Binding Stock, StringFormat='Stock: {0}'}" FontSize="16"/>
+                            <Label Text="{Binding Description}" FontSize="14" LineBreakMode="TailTruncation"/>
+                            
+                            <!--  Command="{Binding Source={x:Reference ProductViewModel}, Path=BindingContext.command}"-->
+                            <Button Text="Cập nhập" 
+                                    Clicked="Update_page"
+                                    CommandParameter="{Binding .}"/>
+                            <Button Text="Xóa" 
+                            Clicked="Delete_Clicked"
+                            CommandParameter="{Binding Id}"/>
+                        </VerticalStackLayout>
+                    </Frame>
+                </DataTemplate>
+            </CollectionView.ItemTemplate>
+        </CollectionView>
+
+    </VerticalStackLayout>
+</ContentPage>
