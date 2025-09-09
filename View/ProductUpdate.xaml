@@ -1,0 +1,34 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="ManagerProduct.View.ProductUpdate"
+             Title="NewPage1">
+    <VerticalStackLayout>
+
+        <StackLayout Padding="20" Spacing="10">
+        <Entry x:Name="Id" Text="{Binding Id}" IsVisible="False"/>
+        <Label Text="Name" />
+            <Entry x:Name="Name" Text="{Binding Name}"/>
+        <Label Text="Category" />
+            <Entry x:Name="Category" Text="{Binding Category}"/>
+        <Label Text="Price" />
+            <Entry x:Name="Price" Text="{Binding Price}"/>
+        <Label Text="Stock" />
+            <Entry x:Name="Stock" Text="{Binding Stock}"/>
+
+        <!--     <Label Text="Name" />
+            <Button Text="import photo" Clicked="Button_ImportImage"/>
+            <Image x:Name="ProductImage" 
+                   WidthRequest="200" 
+                   HeightRequest="200"
+                   Aspect="AspectFit
+                            -->
+
+        <Label Text="Description" />
+            <Entry x:Name="Description" Text="{Binding Description}"/>
+        <Button x:Name="UpdateButton"
+                    Text="Add"
+                    Clicked="UpdateButton_Clicked"/>
+        </StackLayout>
+    </VerticalStackLayout>
+</ContentPage>
