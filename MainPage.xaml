@@ -28,8 +28,8 @@
             </Grid>
 
             <Button Text="productList" Clicked="Button_Clicked"/>
+            <Button Text="Customer List" Clicked="Button_Clicked1"/>
 
-            
             <ScrollView>
 
                 <StackLayout Padding="20" Spacing="10">
