@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="ManagerProduct.View.CustomerView"
+             xmlns:local="clr-namespace:ManagerProduct.Model"
+             Title="Danh sách khách hàng">
+    <VerticalStackLayout>
+        <CollectionView x:Name="CustomerCollectionView"
+                        ItemsSource="{Binding Customer}"
+                        EmptyView="chưa có khách hàng">
+        <CollectionView.ItemTemplate>
+                <DataTemplate x:DataType="local:Customer">
+                    
+                    <Frame BackgroundColor="Aqua" BorderColor="LightGray" CornerRadius="10" Padding="10" Margin="5">
+                        <VerticalStackLayout>
+                            <!-- <Image Source="{Binding ImageUrl}" HeightRequest="150" Aspect="AspectFill"/> -->
+                            <Label Text="{Binding Name}" FontAttributes="Bold" FontSize="20"/>
+                            <Label Text="{Binding BirthDate, StringFormat='{0:dd:MM:yyyy}'}" TextColor="Gray" FontSize="16"/>
+                            <Label Text="{Binding Address}" FontSize="16"/>
+                            <Label Text="{Binding PhoneNumber}" FontSize="16"/>
+                            <Label Text="{Binding Email}" FontSize="16"/>
+
+                            <!--  Command="{Binding Source={x:Reference ProductViewModel}, Path=BindingContext.command}"-->
+                            <!-- <Button Text="Cập nhật" 
+                             Clicked="Update_page"
+                            CommandParameter="{Binding .}"/>
+                             <Button Text="Xóa" 
+                             Clicked="Delete_Clicked"
+                             CommandParameter="{Binding Id}"/>  -->
+                        </VerticalStackLayout> 
+                    </Frame>
+                </DataTemplate>
+            </CollectionView.ItemTemplate>
+        </CollectionView>
+        
+    </VerticalStackLayout>
+</ContentPage>

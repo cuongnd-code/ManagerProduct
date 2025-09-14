@@ -19,8 +19,7 @@ namespace ManagerProduct
 			builder.Services.AddDbContext<AppDbContext>( option =>
 			{
 				option.UseSqlite($"Filename={System.IO.Path.Combine(FileSystem.AppDataDirectory, "products.db")}");
-
-			}
+            }
 				);
 			builder.Services.AddTransient<MainPage>();
 

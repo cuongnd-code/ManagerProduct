@@ -46,6 +46,11 @@ namespace ManagerProduct
 			await Navigation.PushAsync(new ProductView());
 		}
 
+		private async void Button_Clicked1(object sender, EventArgs e)
+		{
+			await Navigation.PushAsync(new CustomerView());
+		}
+
 		//private async void Button_ImportImage(object sender, EventArgs e)
 		//{
 		//	var result = await FilePicker.PickAsync(new PickOptions
