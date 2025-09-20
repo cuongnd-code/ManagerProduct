@@ -21,8 +21,9 @@ namespace ManagerProduct
 		{
 			InitializeComponent();
 			appDbContext = context;
+
 		}
-		private async void AddButton_Clicked(object sender, EventArgs e)
+		private  void AddButton_Clicked(object sender, EventArgs e)
 		{
 			var product = new Product
 			{
@@ -34,9 +35,9 @@ namespace ManagerProduct
 				Stock = int.TryParse(Stock.Text, out var stock) ? stock : 0
 			};
 
-			await appDbContext.Products.AddAsync(product);
-			await appDbContext.SaveChangesAsync();
-			await DisplayAlert("Thành công", "Đã thêm sản phẩm!", "OK");
+			 appDbContext.Products.Add(product);
+			 appDbContext.SaveChanges();
+			 DisplayAlert("Thành công", "Đã thêm sản phẩm!", "OK");
 
 
 		}

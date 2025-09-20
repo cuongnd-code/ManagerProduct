@@ -21,17 +21,19 @@
                             <Label Text="{Binding Email}" FontSize="16"/>
 
                             <!--  Command="{Binding Source={x:Reference ProductViewModel}, Path=BindingContext.command}"-->
-                            <!-- <Button Text="Cập nhật" 
-                             Clicked="Update_page"
+                            <Button Text="Cập nhật" 
+                             Clicked="Update_Customer"
                             CommandParameter="{Binding .}"/>
                              <Button Text="Xóa" 
-                             Clicked="Delete_Clicked"
-                             CommandParameter="{Binding Id}"/>  -->
+                             Clicked="Delete_Customer"
+                             CommandParameter="{Binding Id}"/>  
                         </VerticalStackLayout> 
                     </Frame>
                 </DataTemplate>
             </CollectionView.ItemTemplate>
         </CollectionView>
+
+        <Button Text="Add" Clicked="Customer_Add"/>
         
     </VerticalStackLayout>
 </ContentPage>
