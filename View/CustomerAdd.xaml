@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="utf-8" ?>
+
+<ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="ManagerProduct.View.CustomerAdd"
+             xmlns:local="clr-namespace:ManagerProduct.Model"
+             Title="CustomerAdd">
+    <VerticalStackLayout Spacing="15" Padding="20">
+        <ScrollView>
+            <StackLayout Padding="20" Spacing="10">
+                <Label Text="Name" />
+                <Entry x:Name="Name"/>
+                <Label Text="Birth Date" />
+                <DatePicker x:Name="BirthDate"
+                Format="dd/MM/yyyy"
+                MinimumDate="01/01/1900" />
+                <Label Text="Address" />
+                <Entry x:Name="Address"/>
+                <Label Text="PhoneNumber" />
+                <Entry x:Name="PhoneNumber"/>
+                <Label Text="Email" />
+                <Entry x:Name="Email"/>
+                <Button x:Name="AddButon"
+                        Text="Add"
+                        Clicked="AddButton_Clicked1"/>
+            </StackLayout>
+        </ScrollView>
+    </VerticalStackLayout>
+</ContentPage>

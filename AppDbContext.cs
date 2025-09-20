@@ -1,8 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿
 using ManagerProduct.Model;
 using Microsoft.EntityFrameworkCore;
 
@@ -15,9 +11,8 @@ namespace ManagerProduct
 		public static string DbPath { get; } = System.IO.Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.LocalApplicationData), "products.db");
 		
 		public AppDbContext() {
-			Database.EnsureDeleted();
+			//Database.EnsureDeleted();
 			Database.EnsureCreated();
-
 		}
 		public AppDbContext(string path) { }
 
@@ -29,6 +24,7 @@ namespace ManagerProduct
 
 
 		}
+       
 
-	}
+    }
 }

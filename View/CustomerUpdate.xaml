@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="utf-8" ?>
+
+<ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="ManagerProduct.View.CustomerUpdate"
+             Title="CustomerUpdate">
+    <VerticalStackLayout>
+
+        <StackLayout Padding="20" Spacing="10">
+            <Entry x:Name="Id" Text="{Binding Id}" IsVisible="False"/>
+            <Label Text="Name" />
+            <Entry x:Name="Name" Text="{Binding Name}"/>
+            <Label Text="BirthDate" />
+            <DatePicker x:Name="BirthDate"
+                        Date="{Binding BirthDate}"
+                        Format="dd/MM/yyyy"
+                        MinimumDate="01/01/1900"/>
+            <Label Text="Address" />
+            <Entry x:Name="Address" Text="{Binding Address}"/>
+            <Label Text="PhoneNumber" />
+            <Entry x:Name="PhoneNumber" Text="{Binding PhoneNumber}"/>
+            <Label Text="Email" />
+            <Entry x:Name="Email" Text="{Binding Email}"/>
+            <Button x:Name="UpdateButton"
+                Text="Update"
+                Clicked="UpdateButton_Clicked"/>
+        </StackLayout>
+    </VerticalStackLayout>
+</ContentPage>
