@@ -4,12 +4,55 @@
     xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
     xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
     xmlns:local="clr-namespace:ManagerProduct"
+    xmlns:local2="clr-namespace:ManagerProduct.View"
     Shell.FlyoutBehavior="Disabled"
     Title="ManagerProduct">
 
-    <ShellContent
-        Title="Home"
-        ContentTemplate="{DataTemplate local:MainPage}"
-        Route="MainPage" />
 
+
+
+
+    <Shell.Resources>
+        <!-- Style cho TabBar -->
+        
+        <Style TargetType="TabBar">
+            <Setter Property="Shell.BackgroundColor" Value="#ffffff"/>
+            <Setter Property="Shell.ForegroundColor" Value="#333333"/>
+            <Setter Property="Shell.TitleColor" Value="#333333"/>
+            <Setter Property="Shell.UnselectedColor" Value="#999999"/>
+            <!-- <Setter Property="Shell.TabBarTitleFontSize" Value="20"/> -->
+            <!-- chỉnh cỡ chữ (emoji cũng to) -->
+
+        </Style>
+
+        <!-- Style cho ShellContent (Tab) -->
+        <Style TargetType="ShellContent">
+            <Setter Property="Shell.TabBarBackgroundColor" Value="#ffffff"/>
+            <Setter Property="Shell.TabBarTitleColor" Value="#007AFF"/>
+            <Setter Property="Shell.TabBarUnselectedColor" Value="#999999"/>
+
+        </Style>
+    </Shell.Resources>
+
+    <TabBar>
+        <ShellContent
+            Title="🏠 Home"
+            ContentTemplate="{DataTemplate local:MainPage}"
+            Route="MainPage" />
+
+        <ShellContent
+            Title="📦 Product"
+            ContentTemplate="{DataTemplate local2:ProductView}"
+            Route="ProductView" />
+
+        <ShellContent
+            Title="🧾 Order"
+            ContentTemplate="{DataTemplate local2:OrderView}"
+            Route="OrderView" />
+
+        <ShellContent
+            Title="👥 Customer"
+            ContentTemplate="{DataTemplate local2:CustomerView}"
+            Route="CustomerView" />
+    </TabBar>
 </Shell>

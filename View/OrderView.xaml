@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="ManagerProduct.View.OrderView"
+             Title="OrderView">
+    <VerticalStackLayout>
+
+        <Label Text="danh sách hóa đơn"/>
+        <Button Text="Add Order" Clicked="AddOrderButton_Clicked"/>
+
+        <CollectionView x:Name="OrderCollectionView"
+                        >
+            <CollectionView.ItemTemplate>
+                <DataTemplate>
+                    <Frame BorderColor="Gray" CornerRadius="5" Padding="10" Margin="5">
+                        <StackLayout>
+                            <Label Text="{Binding OrderId}" FontAttributes="Bold" FontSize="16"/>
+                            <Label Text="{Binding CustomerName}" FontSize="14"/>
+                            <Label Text="{Binding OrderDate, StringFormat='Order Date: {0:MM/dd/yyyy}'}" FontSize="14"/>
+                            <Label Text="{Binding TotalAmount, StringFormat='Total Amount: {0:C}'}" FontSize="14"/>
+                            <Button x:Name="OrderDetail_Button" 
+                                    Text="Chi tiết"
+                                    Clicked="OrderDetaiView"
+                                    CommandParameter="{Binding .}"/>
+                        </StackLayout>
+                    </Frame>
+                </DataTemplate>
+            </CollectionView.ItemTemplate>
+        </CollectionView>
+    </VerticalStackLayout>
+</ContentPage>

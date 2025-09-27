@@ -1,0 +1,34 @@
+    
+<ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="ManagerProduct.View.ProductAdd"
+             Title="ProductAdd">
+    <ScrollView>
+
+        <StackLayout Padding="20" Spacing="10">
+
+            <Label Text="Name" />
+            <Entry x:Name="Name"/>
+            <Label Text="Category" />
+            <Entry x:Name="Category"/>
+            <Label Text="Price" />
+            <Entry x:Name="Price"/>
+            <Label Text="Stock" />
+            <Entry x:Name="Stock"/>
+
+            <!--     <Label Text="Name" />
+ <Button Text="import photo" Clicked="Button_ImportImage"/>
+ <Image x:Name="ProductImage" 
+        WidthRequest="200" 
+        HeightRequest="200"
+        Aspect="AspectFit
+                 -->
+
+            <Label Text="Description" />
+            <Entry x:Name="Description"/>
+            <Button x:Name="AddButton"
+         Text="Add"
+         Clicked="AddButton_Clicked"/>
+        </StackLayout>
+    </ScrollView>
+</ContentPage>

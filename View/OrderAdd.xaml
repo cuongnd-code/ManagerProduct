@@ -1,0 +1,44 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="ManagerProduct.View.OrderAdd"
+             Title="OrderAdd">
+    <VerticalStackLayout>
+        <Label 
+            Text="thêm hóa đơn"
+            VerticalOptions="Center" 
+            HorizontalOptions="Center" />
+
+        <StackLayout>
+
+
+            <Picker x:Name="CustomerPicker"
+                    Title="Select Customer"
+                    ItemsSource="{Binding Customer}"
+                    ItemDisplayBinding="{Binding Name}" />
+
+            <CollectionView x:Name="ProductPicker" 
+                            ItemsSource="{Binding product}"
+                            SelectionMode="Multiple">
+                <CollectionView.ItemTemplate>
+                    <DataTemplate>
+
+                        <StackLayout Orientation="Horizontal" Padding="10">
+                            <CheckBox IsChecked="{Binding IsSelected, Mode=TwoWay}" VerticalOptions="Center"/>
+                            <Label Text="{Binding product.Name}" FontSize="16" VerticalOptions="Center" WidthRequest="150"/>
+                            <Label Text="{Binding Price, StringFormat='Price: {0:C}'}" FontSize="16" VerticalOptions="Center" WidthRequest="100"/>
+                            <Entry Placeholder="Quantity" WidthRequest="80" Keyboard="Numeric" Text="{Binding Quantity, Mode=TwoWay}" />
+                        </StackLayout>
+                    </DataTemplate>
+                </CollectionView.ItemTemplate>
+            </CollectionView>
+
+
+
+            <Button x:Name="AddOrderButton"
+                      Text="Add Order"
+                 Clicked="AddOrderButton_Clicked"/>
+
+        </StackLayout>
+    </VerticalStackLayout>
+</ContentPage>

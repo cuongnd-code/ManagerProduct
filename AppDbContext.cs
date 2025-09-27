@@ -1,4 +1,4 @@
-﻿
+﻿ 
 using ManagerProduct.Model;
 using Microsoft.EntityFrameworkCore;
 
@@ -8,6 +8,9 @@ namespace ManagerProduct
 	{
 		public DbSet<Product> Products { get; set; }
 		public DbSet<Customer> Customers { get; set; }
+		public DbSet<Order> Orders { get; set; }
+		public DbSet<OrderDetailModel> OrderDetails { get; set; }
+
 		public static string DbPath { get; } = System.IO.Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.LocalApplicationData), "products.db");
 		
 		public AppDbContext() {

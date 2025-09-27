@@ -1,32 +1,71 @@
-<?xml version="1.0" encoding="utf-8" ?>
 <ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              x:Class="ManagerProduct.View.ProductView"
              xmlns:local="clr-namespace:ManagerProduct.Model"
-             Title="Danh sách sản phẩm">
-    <VerticalStackLayout>
+             Title="Danh sách sản phẩm"
+             BackgroundColor="#F5F5F5">
+
+    <VerticalStackLayout Padding="10" Spacing="10">
+
+        <!-- Thanh tìm kiếm -->
+        <SearchBar Placeholder="Tìm kiếm sản phẩm..."
+                   BackgroundColor="White"
+                   Margin="0,5,0,0"
+                   
+                   />
+
+        <!-- Nút thêm -->
+        <Button Text="➕ Thêm sản phẩm"
+                BackgroundColor="#2E86AB"
+                TextColor="White"
+                CornerRadius="20"
+                Padding="12,6"/>
+
+        <!-- Danh sách sản phẩm -->
         <CollectionView x:Name="ProductCollectionView"
                         ItemsSource="{Binding Product}"
-                        EmptyView=" chưa có sản phẩm ">
+                        EmptyView="Chưa có sản phẩm"
+                        Margin="0,10,0,0">
             <CollectionView.ItemTemplate>
                 <DataTemplate x:DataType="local:Product">
+                    <Frame BorderColor="#DDDDDD"
+                           CornerRadius="12"
+                           Padding="12"
+                           Margin="6"
+                           HasShadow="True"
+                           BackgroundColor="White">
+                        <VerticalStackLayout Spacing="6">
+                            <Label Text="{Binding Name}" 
+                                   FontAttributes="Bold" 
+                                   FontSize="18"/>
+                            <Label Text="{Binding Category}" 
+                                   FontSize="14" 
+                                   TextColor="Gray"/>
+                            <Label Text="{Binding Price, StringFormat='Giá: {0:C}'}" 
+                                   FontSize="14" 
+                                   TextColor="#2E86AB"/>
+                            <Label Text="{Binding Stock, StringFormat='Tồn kho: {0}'}" 
+                                   FontSize="14"/>
+                            <Label Text="{Binding Description}" 
+                                   FontSize="13" 
+                                   LineBreakMode="TailTruncation" 
+                                   TextColor="DimGray"/>
 
-                    <Frame BorderColor="LightGray" CornerRadius="10" Padding="10" Margin="5">
-                        <VerticalStackLayout>
-                           <!-- <Image Source="{Binding ImageUrl}" HeightRequest="150" Aspect="AspectFill"/> -->
-                            <Label Text="{Binding Name}" FontAttributes="Bold" FontSize="20"/>
-                            <Label Text="{Binding Category}" FontSize="16" TextColor="Gray"/>
-                            <Label Text="{Binding Price, StringFormat='Price: {0:C}'}" FontSize="16"/>
-                            <Label Text="{Binding Stock, StringFormat='Stock: {0}'}" FontSize="16"/>
-                            <Label Text="{Binding Description}" FontSize="14" LineBreakMode="TailTruncation"/>
-                            
-                            <!--  Command="{Binding Source={x:Reference ProductViewModel}, Path=BindingContext.command}"-->
-                            <Button Text="Cập nhập" 
-                                    Clicked="Update_page"
-                                    CommandParameter="{Binding .}"/>
-                            <Button Text="Xóa" 
-                            Clicked="Delete_Clicked"
-                            CommandParameter="{Binding Id}"/>
+                            <!-- Nút chức năng -->
+                            <HorizontalStackLayout Spacing="10" Margin="0,5,0,0">
+                                <Button Text="✏ Cập nhật" 
+                                        BackgroundColor="#FFA726"
+                                        TextColor="White"
+                                        CornerRadius="8"
+                                        Padding="10,5"
+                                        CommandParameter="{Binding .}"/>
+                                <Button Text="🗑 Xóa" 
+                                        BackgroundColor="#E53935"
+                                        TextColor="White"
+                                        CornerRadius="8"
+                                        Padding="10,5"
+                                        CommandParameter="{Binding Id}"/>
+                            </HorizontalStackLayout>
                         </VerticalStackLayout>
                     </Frame>
                 </DataTemplate>

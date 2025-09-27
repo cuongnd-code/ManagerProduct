@@ -13,51 +13,14 @@
 
 
         <VerticalStackLayout Spacing="15" Padding="20">
-            <Grid RowDefinitions="Auto,Auto,Auto">
-                <Button Text="productList 1"
-            Clicked="Button_Clicked"
-            Grid.Column="0" />
-
-                <Button Text="productList 2"
-            Clicked="Button_Clicked"
-            Grid.Column="1" />
-
-                <Button Text="productList 3"
-            Clicked="Button_Clicked"
-            Grid.Column="2" />
-            </Grid>
+          
 
             <Button Text="productList" Clicked="Button_Clicked"/>
             <Button Text="Customer List" Clicked="Button_Clicked1"/>
+            <Button Text="Order List" Clicked="OrderButton_Clicked"/>
 
-            <ScrollView>
 
-                <StackLayout Padding="20" Spacing="10">
 
-                    <Label Text="Name" />
-                    <Entry x:Name="Name"/>
-                    <Label Text="Category" />
-                    <Entry x:Name="Category"/>
-                    <Label Text="Price" />
-                    <Entry x:Name="Price"/>
-                    <Label Text="Stock" />
-                    <Entry x:Name="Stock"/>
-
-                    <!--     <Label Text="Name" />
-            <Button Text="import photo" Clicked="Button_ImportImage"/>
-            <Image x:Name="ProductImage" 
-                   WidthRequest="200" 
-                   HeightRequest="200"
-                   Aspect="AspectFit
-                            -->
-
-                    <Label Text="Description" />
-                    <Entry x:Name="Description"/>
-                    <Button x:Name="AddButton"
-                    Text="Add"
-                    Clicked="AddButton_Clicked"/>
-                </StackLayout>
-            </ScrollView>
         </VerticalStackLayout>
     </ScrollView>
 

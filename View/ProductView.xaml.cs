@@ -63,4 +63,19 @@ public partial class ProductView : ContentPage
 		ProductList();
 	}
 
+	private async void Add_product(object sender, EventArgs e)
+	{
+
+		await Navigation.PushAsync(new ProductAdd());
+    }
+
+	private void OnSearch(object sender, EventArgs e)
+	{
+
+    }
+
+	private void OnFilterClicked(object sender, EventArgs e)
+	{
+
+	}
 }
