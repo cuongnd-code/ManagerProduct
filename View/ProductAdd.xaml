@@ -24,7 +24,7 @@
         Aspect="AspectFit
                  -->
 
-            <Label Text="Description" />
+            <Label Text="Description"/>
             <Entry x:Name="Description"/>
             <Button x:Name="AddButton"
          Text="Add"

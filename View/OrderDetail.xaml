@@ -17,7 +17,6 @@
                         <Label Text="{Binding UnitPrice, StringFormat='Price: {0:C}'}" FontSize="16" VerticalOptions="Center" WidthRequest="100"/>
                         <Label Text="{Binding Quantity, StringFormat='Quantity: {0}'}" FontSize="16" VerticalOptions="Center" WidthRequest="100"/>
                     </StackLayout>
-
                 </DataTemplate>
             </CollectionView.ItemTemplate>
             

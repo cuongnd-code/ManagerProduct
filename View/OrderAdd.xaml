@@ -10,8 +10,6 @@
             HorizontalOptions="Center" />
 
         <StackLayout>
-
-
             <Picker x:Name="CustomerPicker"
                     Title="Select Customer"
                     ItemsSource="{Binding Customer}"
@@ -32,9 +30,6 @@
                     </DataTemplate>
                 </CollectionView.ItemTemplate>
             </CollectionView>
-
-
-
             <Button x:Name="AddOrderButton"
                       Text="Add Order"
                  Clicked="AddOrderButton_Clicked"/>

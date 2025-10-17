@@ -9,6 +9,23 @@
                 <ResourceDictionary Source="Resources/Styles/Colors.xaml" />
                 <ResourceDictionary Source="Resources/Styles/Styles.xaml" />
             </ResourceDictionary.MergedDictionaries>
+
+        <ControlTemplate x:Key="BaseTemplate">
+            <Grid RowDefinitions="Auto,*">
+
+                <!-- Vùng nội dung -->
+                <ContentPresenter Grid.Row="0"/>
+
+                <!-- Đường kẻ chung -->
+
+                    <BoxView HeightRequest="2"
+                 BackgroundColor="#6200EE"
+                 VerticalOptions="End"
+                 HorizontalOptions="Fill" />
+                </Grid>
+            
+        </ControlTemplate>
         </ResourceDictionary>
+
     </Application.Resources>
 </Application>

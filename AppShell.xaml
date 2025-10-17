@@ -14,15 +14,14 @@
 
     <Shell.Resources>
         <!-- Style cho TabBar -->
-        
         <Style TargetType="TabBar">
-            <Setter Property="Shell.BackgroundColor" Value="#ffffff"/>
+            <Setter Property="Shell.BackgroundColor" Value="#FFFFFF"/>
             <Setter Property="Shell.ForegroundColor" Value="#333333"/>
             <Setter Property="Shell.TitleColor" Value="#333333"/>
             <Setter Property="Shell.UnselectedColor" Value="#999999"/>
+            
             <!-- <Setter Property="Shell.TabBarTitleFontSize" Value="20"/> -->
             <!-- chỉnh cỡ chữ (emoji cũng to) -->
-
         </Style>
 
         <!-- Style cho ShellContent (Tab) -->
@@ -34,8 +33,10 @@
         </Style>
     </Shell.Resources>
 
-    <TabBar>
-        <ShellContent
+
+ <TabBar>
+     
+        <ShellContent 
             Title="🏠 Home"
             ContentTemplate="{DataTemplate local:MainPage}"
             Route="MainPage" />

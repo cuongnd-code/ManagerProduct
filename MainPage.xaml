@@ -1,7 +1,9 @@
 ﻿<?xml version="1.0" encoding="utf-8" ?>
 <ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
-             x:Class="ManagerProduct.MainPage">
+             x:Class="ManagerProduct.MainPage"
+             ControlTemplate="{StaticResource BaseTemplate}"
+             >
     <!-- trong scg o tren con co Dictionary ObservableCollection(tu dong thong bao khi du lieu thay doi) HashSet-->
     <?HorizontalStackLayout la ngang?>
 <!--             xmlns:local="clr-namespace:MarkupExtensions" mac dinh tinh nhu la muon co font =18 hay gi do
@@ -13,15 +15,41 @@
 
 
         <VerticalStackLayout Spacing="15" Padding="20">
-          
 
-            <Button Text="productList" Clicked="Button_Clicked"/>
-            <Button Text="Customer List" Clicked="Button_Clicked1"/>
-            <Button Text="Order List" Clicked="OrderButton_Clicked"/>
+            <Label x:Name="aaa"/>
+
+            <Grid>
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="Auto"/>
+                    <ColumnDefinition Width="Auto"/>
+                    <ColumnDefinition Width="Auto"/>
+                    <ColumnDefinition Width="Auto"/>
+
+                </Grid.ColumnDefinitions>
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="auto"/>
+                    <RowDefinition Height="auto"/>
+                    <RowDefinition Height="auto"/>
+                </Grid.RowDefinitions>
 
 
+                <Label x:Name="TotalOrder" Grid.Column="0" Grid.Row="0" Text="{Binding a}"/>
+                <Label x:Name="TotalRevene" Grid.Column="0" Grid.Row="1" Text="a"/>
+                <Label x:Name="a" Grid.Column="0" Grid.Row="2" Text="c"/>
+                <Button Grid.Column="0" Grid.Row="1" Text="productList" Clicked="Button_Clicked"/>
+                <Button Grid.Column="1" Grid.Row="1" Text="Customer List" Clicked="Button_Clicked1"/>
+                <Button Grid.Column="2" Grid.Row="1" Text="Order List" Clicked="OrderButton_Clicked"/>
+                <Button Grid.Column="3" Grid.Row="1" Text="zzz" Clicked="OrderButton_Clicked"/>
 
-        </VerticalStackLayout>
+                
+                
+
+            </Grid>
+            
+           
+        </VerticalStackLayout> 
+        
+        
     </ScrollView>
 
 
