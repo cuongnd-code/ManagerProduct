@@ -15,7 +15,8 @@
                    />
 
         <!-- Nút thêm -->
-        <Button Text="➕ Thêm sản phẩm"
+        <Button Clicked="Add_product"
+            Text="➕ Thêm sản phẩm"
                 BackgroundColor="#2E86AB"
                 TextColor="White"
                 CornerRadius="20"

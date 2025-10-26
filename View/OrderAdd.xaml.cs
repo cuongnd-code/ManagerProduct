@@ -8,6 +8,7 @@ public partial class OrderAdd : ContentPage
 
 	private AppDbContext _context = new AppDbContext();
 	private List<Customer> customer;
+	private List<Product> productList;
 	private List<ProductSelectable> productSelectable = new List<ProductSelectable>();
 	private List<OrderDetailModel> orderDetails =new List<OrderDetailModel>();
 
@@ -16,22 +17,29 @@ public partial class OrderAdd : ContentPage
 		InitializeComponent();
 		customer = _context.Customers.ToList();
 
-
-		foreach (var p in _context.Products.ToList())
+		productList = _context.Products.ToList();
+		if (productList != null)
 		{
-			productSelectable.Add(new ProductSelectable {
-				product = p,
-				productID = p.Id,
-				Quantity = 0,
-				Price = p.Price,
-				IsSelected = false, 
-				 });
+            foreach (var p in productList)
+            {
+                productSelectable.Add(new ProductSelectable
+                {
+                    product = p,
+                    productID = p.Id,
+                    Quantity = 0,
+                    Price = p.Price,
+                    IsSelected = false,
+                });
 
-			ProductPicker.ItemsSource = productSelectable;
-			CustomerPicker.ItemsSource = customer;
-		}
 
-	}
+            }
+        }
+		
+		
+        ProductPicker.ItemsSource = productSelectable;
+        CustomerPicker.ItemsSource = customer;
+
+    }
 
 	private async void SaveOrderButton_Clicked(object sender, EventArgs e)
 	{
