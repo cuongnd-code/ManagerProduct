@@ -1,3 +1,4 @@
+<?xml version="1.0" encoding="utf-8" ?>
 <ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              x:Class="ManagerProduct.View.ProductView"
@@ -5,73 +6,85 @@
              Title="Danh sách sản phẩm"
              BackgroundColor="#F5F5F5">
 
-    <VerticalStackLayout Padding="10" Spacing="10">
+    <Grid RowDefinitions="Auto,Auto,*" Padding="12" RowSpacing="10">
 
         <!-- Thanh tìm kiếm -->
-        <SearchBar Placeholder="Tìm kiếm sản phẩm..."
+        <SearchBar x:Name="ProductSearchBar"
+                   Grid.Row="0"
+                   Placeholder="Tìm kiếm theo tên hoặc danh mục..."
                    BackgroundColor="White"
-                   Margin="0,5,0,0"
-                   
-                   />
+                   TextChanged="SearchBar_TextChanged" />
 
         <!-- Nút thêm -->
-        <Button Clicked="Add_product"
-            Text="➕ Thêm sản phẩm"
+        <Button Grid.Row="1"
+                Clicked="Add_product"
+                Text="➕ Thêm sản phẩm"
                 BackgroundColor="#2E86AB"
                 TextColor="White"
                 CornerRadius="20"
-                Padding="12,6"/>
+                Padding="12,8"
+                FontAttributes="Bold" />
 
         <!-- Danh sách sản phẩm -->
         <CollectionView x:Name="ProductCollectionView"
-                        ItemsSource="{Binding Product}"
-                        EmptyView="Chưa có sản phẩm"
-                        Margin="0,10,0,0">
+                        Grid.Row="2"
+                        EmptyView="Chưa có sản phẩm nào trong kho">
             <CollectionView.ItemTemplate>
                 <DataTemplate x:DataType="local:Product">
-                    <Frame BorderColor="#DDDDDD"
+                    <Frame BorderColor="#E0E0E0"
                            CornerRadius="12"
-                           Padding="12"
-                           Margin="6"
+                           Padding="14"
+                           Margin="0,0,0,10"
                            HasShadow="True"
                            BackgroundColor="White">
                         <VerticalStackLayout Spacing="6">
-                            <Label Text="{Binding Name}" 
-                                   FontAttributes="Bold" 
-                                   FontSize="18"/>
-                            <Label Text="{Binding Category}" 
-                                   FontSize="14" 
-                                   TextColor="Gray"/>
-                            <Label Text="{Binding Price, StringFormat='Giá: {0:C}'}" 
-                                   FontSize="14" 
+                            <HorizontalStackLayout Spacing="8">
+                                <Label Text="{Binding Name}" 
+                                       FontAttributes="Bold" 
+                                       FontSize="16"
+                                       TextColor="#222222"
+                                       LineBreakMode="TailTruncation" />
+                                <Label Text="{Binding Category, StringFormat='({0})'}" 
+                                       FontSize="13" 
+                                       TextColor="#888888"
+                                       VerticalOptions="Center" />
+                            </HorizontalStackLayout>
+                            <Label Text="{Binding Price, StringFormat='Giá: {0:N0} ₫'}" 
+                                   FontSize="15" 
+                                   FontAttributes="Bold"
                                    TextColor="#2E86AB"/>
-                            <Label Text="{Binding Stock, StringFormat='Tồn kho: {0}'}" 
-                                   FontSize="14"/>
+                            <Label Text="{Binding Stock, StringFormat='Tồn kho: {0} sản phẩm'}" 
+                                   FontSize="13"
+                                   TextColor="#555555"/>
                             <Label Text="{Binding Description}" 
                                    FontSize="13" 
                                    LineBreakMode="TailTruncation" 
-                                   TextColor="DimGray"/>
+                                   TextColor="#777777"/>
 
                             <!-- Nút chức năng -->
-                            <HorizontalStackLayout Spacing="10" Margin="0,5,0,0">
-                                <Button Text="✏ Cập nhật" 
+                            <Grid ColumnDefinitions="*,*" ColumnSpacing="10" Margin="0,6,0,0">
+                                <Button Grid.Column="0"
+                                        Text="✏ Cập nhật" 
                                         BackgroundColor="#FFA726"
                                         TextColor="White"
                                         CornerRadius="8"
-                                        Padding="10,5"
+                                        Padding="10,6"
+                                        Clicked="Update_page"
                                         CommandParameter="{Binding .}"/>
-                                <Button Text="🗑 Xóa" 
+                                <Button Grid.Column="1"
+                                        Text="🗑 Xóa" 
                                         BackgroundColor="#E53935"
                                         TextColor="White"
                                         CornerRadius="8"
-                                        Padding="10,5"
+                                        Padding="10,6"
+                                        Clicked="Delete_Clicked"
                                         CommandParameter="{Binding Id}"/>
-                            </HorizontalStackLayout>
+                            </Grid>
                         </VerticalStackLayout>
                     </Frame>
                 </DataTemplate>
             </CollectionView.ItemTemplate>
         </CollectionView>
 
-    </VerticalStackLayout>
+    </Grid>
 </ContentPage>

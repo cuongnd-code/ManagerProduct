@@ -1,34 +1,35 @@
-    
+<?xml version="1.0" encoding="utf-8" ?>
 <ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              x:Class="ManagerProduct.View.ProductAdd"
-             Title="ProductAdd">
+             Title="Thêm sản phẩm mới"
+             BackgroundColor="#F9F9F9">
     <ScrollView>
+        <VerticalStackLayout Padding="20" Spacing="14">
+            <Label Text="Tên sản phẩm (*)" FontAttributes="Bold" FontSize="14" TextColor="#333333"/>
+            <Entry x:Name="Name" Placeholder="Nhập tên sản phẩm..." BackgroundColor="White"/>
 
-        <StackLayout Padding="20" Spacing="10">
+            <Label Text="Danh mục" FontAttributes="Bold" FontSize="14" TextColor="#333333"/>
+            <Entry x:Name="Category" Placeholder="VD: Linh kiện, Phụ kiện..." BackgroundColor="White"/>
 
-            <Label Text="Name" />
-            <Entry x:Name="Name"/>
-            <Label Text="Category" />
-            <Entry x:Name="Category"/>
-            <Label Text="Price" />
-            <Entry x:Name="Price"/>
-            <Label Text="Stock" />
-            <Entry x:Name="Stock"/>
+            <Label Text="Giá bán (₫)" FontAttributes="Bold" FontSize="14" TextColor="#333333"/>
+            <Entry x:Name="Price" Placeholder="VD: 500000" Keyboard="Numeric" BackgroundColor="White"/>
 
-            <!--     <Label Text="Name" />
- <Button Text="import photo" Clicked="Button_ImportImage"/>
- <Image x:Name="ProductImage" 
-        WidthRequest="200" 
-        HeightRequest="200"
-        Aspect="AspectFit
-                 -->
+            <Label Text="Số lượng tồn kho" FontAttributes="Bold" FontSize="14" TextColor="#333333"/>
+            <Entry x:Name="Stock" Placeholder="VD: 10" Keyboard="Numeric" BackgroundColor="White"/>
 
-            <Label Text="Description"/>
-            <Entry x:Name="Description"/>
+            <Label Text="Mô tả sản phẩm" FontAttributes="Bold" FontSize="14" TextColor="#333333"/>
+            <Editor x:Name="Description" Placeholder="Nhập thông tin mô tả chi tiết..." HeightRequest="90" BackgroundColor="White"/>
+
             <Button x:Name="AddButton"
-         Text="Add"
-         Clicked="AddButton_Clicked"/>
-        </StackLayout>
+                    Text="Lưu sản phẩm"
+                    FontAttributes="Bold"
+                    BackgroundColor="#2E86AB"
+                    TextColor="White"
+                    CornerRadius="10"
+                    Padding="12,12"
+                    Margin="0,10,0,0"
+                    Clicked="AddButton_Clicked"/>
+        </VerticalStackLayout>
     </ScrollView>
 </ContentPage>

@@ -1,67 +1,60 @@
-﻿using ManagerProduct.Model;
 using ManagerProduct.View;
 
 namespace ManagerProduct
 {
-
-	//[XamlCompilation (XamlCompilationOptions.Skip)]
-
-
-	// KO THE TU BEN TRONG MA PHAI SUA TU XAML
-	// internal partial class MainPage : ContentPage {}
-	// = x:ClassModifier="NotPublic"
-
 	public partial class MainPage : ContentPage
 	{
-		
-
-		public readonly AppDbContext appDbContext;
-
-		public MainPage(AppDbContext context)
+		public MainPage()
 		{
 			InitializeComponent();
-			appDbContext = context;
-
 		}
-		
 
-		private async void Button_Clicked(object sender, EventArgs e)
+		public MainPage(AppDbContext context) : this()
+		{
+		}
+
+		protected override void OnAppearing()
+		{
+			base.OnAppearing();
+			LoadStatistics();
+		}
+
+		private void LoadStatistics()
+		{
+			try
+			{
+				using var context = new AppDbContext();
+				var totalProducts = context.Products.Count();
+				var lowStock = context.Products.Count(p => (p.Stock ?? 0) <= 0);
+				var totalCustomers = context.Customers.Count();
+				var totalOrders = context.Orders.Count();
+				var totalRevenue = context.Orders.Sum(o => (double?)o.TotalAmount) ?? 0;
+
+				TotalProductsLabel.Text = totalProducts.ToString();
+				LowStockLabel.Text = $"Hết hàng: {lowStock}";
+				TotalCustomersLabel.Text = totalCustomers.ToString();
+				TotalOrdersLabel.Text = totalOrders.ToString();
+				TotalRevenueLabel.Text = $"{totalRevenue:N0} ₫";
+			}
+			catch
+			{
+				// Ignore initialization timing
+			}
+		}
+
+		private async void NavigateProduct_Clicked(object sender, EventArgs e)
 		{
 			await Navigation.PushAsync(new ProductView());
 		}
 
-		private async void Button_Clicked1(object sender, EventArgs e)
+		private async void NavigateCustomer_Clicked(object sender, EventArgs e)
 		{
 			await Navigation.PushAsync(new CustomerView());
 		}
 
-		private async void OrderButton_Clicked(object sender, EventArgs e)
+		private async void NavigateOrder_Clicked(object sender, EventArgs e)
 		{
-
 			await Navigation.PushAsync(new OrderView());
 		}
-
-        //private async void Button_ImportImage(object sender, EventArgs e)
-        //{
-        //	var result = await FilePicker.PickAsync(new PickOptions
-        //	{ 
-
-
-        //		PickerTitle = "pick image",
-
-        //		FileTypes = FilePickerFileType.Images,
-
-        //	});
-        //	if (result != null)
-        //	{
-        //			var stream = await result.OpenReadAsync();
-        //			ProductImage.Source = ImageSource.FromStream(() => stream);
-
-        //	}
-
-
-
-        //}
-    }
-
+	}
 }

@@ -2,33 +2,36 @@
 <ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              x:Class="ManagerProduct.View.ProductUpdate"
-             Title="NewPage1">
-    <VerticalStackLayout>
+             Title="Cập nhật sản phẩm"
+             BackgroundColor="#F9F9F9">
+    <ScrollView>
+        <VerticalStackLayout Padding="20" Spacing="14">
+            <Entry x:Name="ProductIdEntry" Text="{Binding Id}" IsVisible="False"/>
 
-        <StackLayout Padding="20" Spacing="10">
-        <Entry x:Name="Id" Text="{Binding Id}" IsVisible="False"/>
-        <Label Text="Name" />
-            <Entry x:Name="Name" Text="{Binding Name}"/>
-        <Label Text="Category" />
-            <Entry x:Name="Category" Text="{Binding Category}"/>
-        <Label Text="Price" />
-            <Entry x:Name="Price" Text="{Binding Price}"/>
-        <Label Text="Stock" />
-            <Entry x:Name="Stock" Text="{Binding Stock}"/>
+            <Label Text="Tên sản phẩm (*)" FontAttributes="Bold" FontSize="14" TextColor="#333333"/>
+            <Entry x:Name="Name" Text="{Binding Name}" BackgroundColor="White"/>
 
-        <!--     <Label Text="Name" />
-            <Button Text="import photo" Clicked="Button_ImportImage"/>
-            <Image x:Name="ProductImage" 
-                   WidthRequest="200" 
-                   HeightRequest="200"
-                   Aspect="AspectFit
-                            -->
+            <Label Text="Danh mục" FontAttributes="Bold" FontSize="14" TextColor="#333333"/>
+            <Entry x:Name="Category" Text="{Binding Category}" BackgroundColor="White"/>
 
-        <Label Text="Description" />
-            <Entry x:Name="Description" Text="{Binding Description}"/>
-        <Button x:Name="UpdateButton"
-                    Text="Add"
+            <Label Text="Giá bán (₫)" FontAttributes="Bold" FontSize="14" TextColor="#333333"/>
+            <Entry x:Name="Price" Text="{Binding Price}" Keyboard="Numeric" BackgroundColor="White"/>
+
+            <Label Text="Số lượng tồn kho" FontAttributes="Bold" FontSize="14" TextColor="#333333"/>
+            <Entry x:Name="Stock" Text="{Binding Stock}" Keyboard="Numeric" BackgroundColor="White"/>
+
+            <Label Text="Mô tả sản phẩm" FontAttributes="Bold" FontSize="14" TextColor="#333333"/>
+            <Editor x:Name="Description" Text="{Binding Description}" HeightRequest="90" BackgroundColor="White"/>
+
+            <Button x:Name="UpdateButton"
+                    Text="Lưu cập nhật"
+                    FontAttributes="Bold"
+                    BackgroundColor="#FFA726"
+                    TextColor="White"
+                    CornerRadius="10"
+                    Padding="12,12"
+                    Margin="0,10,0,0"
                     Clicked="UpdateButton_Clicked"/>
-        </StackLayout>
-    </VerticalStackLayout>
+        </VerticalStackLayout>
+    </ScrollView>
 </ContentPage>

@@ -1,5 +1,4 @@
-﻿using ManagerProduct.Model;
-using Microsoft.EntityFrameworkCore;
+using ManagerProduct.Model;
 using System.Windows.Input;
 
 namespace ManagerProduct.View;
@@ -8,58 +7,66 @@ public partial class CustomerView : ContentPage
 {
     public readonly AppDbContext appDbContext;
     public ICommand command { get; }
+
     public CustomerView()
-	{
+    {
         InitializeComponent();
         appDbContext = new AppDbContext();
-        CustomerList();
         command = new Command(CustomerList);
+    }
+
+    protected override void OnAppearing()
+    {
+        base.OnAppearing();
+        CustomerList();
     }
 
     public void CustomerList()
     {
-        var customers = appDbContext.Customers.ToList();
-       CustomerCollectionView.ItemsSource = customers;
+        var keyword = CustomerSearchBar?.Text?.Trim()?.ToLower();
+        var query = appDbContext.Customers.AsQueryable();
+        if (!string.IsNullOrEmpty(keyword))
+        {
+            query = query.Where(c => (c.Name != null && c.Name.ToLower().Contains(keyword)) ||
+                                     (c.PhoneNumber != null && c.PhoneNumber.Contains(keyword)));
+        }
+        CustomerCollectionView.ItemsSource = query.OrderByDescending(c => c.Id).ToList();
     }
 
-    public void RefreshView_Refreshing(object sender, EventArgs e)
+    private void CustomerSearchBar_TextChanged(object sender, TextChangedEventArgs e)
     {
         CustomerList();
-        ((RefreshView)sender).IsRefreshing = false;
     }
 
-    private void Customer_Add(Object sender, EventArgs e)
+    private async void Customer_Add(object sender, EventArgs e)
     {
-        Navigation.PushAsync(new CustomerAdd(appDbContext));
+        await Navigation.PushAsync(new CustomerAdd(appDbContext));
     }
 
-    public void Update_Customer(Object sender, EventArgs e)
+    public async void Update_Customer(object sender, EventArgs e)
     {
         var button = (Button)sender;
         var customer = (Customer)button.CommandParameter;
-        Navigation.PushAsync(new CustomerUpdate(customer));
+        await Navigation.PushAsync(new CustomerUpdate(customer));
     }
 
-    private void Delete_Customer(object sender, EventArgs e)
+    private async void Delete_Customer(object sender, EventArgs e)
     {
-
         var button = (Button)sender;
         var id = (int)button.CommandParameter;
-        var customers = appDbContext.Find<Customer>(id);
-        if (customers == null)
+        var customer = appDbContext.Find<Customer>(id);
+        if (customer == null)
         {
-            DisplayAlert("thất bại", "Không tìm thấy sản phẩm!", "OK");
+            await DisplayAlert("Thất bại", "Không tìm thấy khách hàng!", "OK");
             return;
         }
-        appDbContext.Remove<Customer> (customers);
+
+        bool confirm = await DisplayAlert("Xác nhận", $"Bạn có chắc muốn xóa khách hàng '{customer.Name}'?", "Xóa", "Hủy");
+        if (!confirm) return;
+
+        appDbContext.Remove(customer);
         appDbContext.SaveChanges();
-        DisplayAlert("Thành công", "Đã xóa sản phẩm!", "OK");
+        await DisplayAlert("Thành công", "Đã xóa khách hàng thành công!", "OK");
         CustomerList();
     }
-
-    //public  void RefreshView_Refreshiing(object sender, EventArgs e)
-    //{
-    //    CustomerList();
-    //    ((RefreshView)sender).IsRefreshing = false;
-    //}
 }

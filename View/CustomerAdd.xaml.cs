@@ -1,41 +1,40 @@
-﻿
 using ManagerProduct.Model;
-using ManagerProduct.View;
 
+namespace ManagerProduct.View;
 
-namespace ManagerProduct.View
+public partial class CustomerAdd : ContentPage
 {
+    public readonly AppDbContext appDbContext;
 
-    public partial class CustomerAdd : ContentPage
+    public CustomerAdd(AppDbContext context)
     {
+        InitializeComponent();
+        appDbContext = context;
+        BirthDate.MaximumDate = DateTime.Today;
+        BirthDate.Date = new DateTime(2000, 1, 1);
+    }
 
-        public readonly AppDbContext appDbContext;
-
-       public CustomerAdd(AppDbContext context)
+    private async void AddButton_Clicked(object sender, EventArgs e)
+    {
+        if (string.IsNullOrWhiteSpace(Name.Text))
         {
-            InitializeComponent();
-            appDbContext = context;
-            BirthDate.MaximumDate = DateTime.Today;
+            await DisplayAlert("Lỗi", "Vui lòng nhập họ tên khách hàng!", "OK");
+            return;
         }
 
-        private void AddButton_Clicked1(object sender, EventArgs e)
+        var customer = new Customer
         {
-            var customer = new Customer
-            {
-                Name = Name.Text,
-                BirthDate = BirthDate.Date,       // DatePicker.Date là DateTime
-                Address = Address.Text,
-                PhoneNumber = PhoneNumber.Text,
-                Email = Email.Text
-            };
-            // Thêm vào DbContext
-            appDbContext.Customers.Add(customer);
+            Name = Name.Text.Trim(),
+            BirthDate = BirthDate.Date,
+            Address = Address.Text?.Trim() ?? string.Empty,
+            PhoneNumber = PhoneNumber.Text?.Trim() ?? string.Empty,
+            Email = Email.Text?.Trim() ?? string.Empty
+        };
 
-            // Lưu thay đổi vào database
-            appDbContext.SaveChanges();
+        appDbContext.Customers.Add(customer);
+        appDbContext.SaveChanges();
 
-            // Hiển thị thông báo
-            DisplayAlert("Thành công", "Đã thêm khách hàng!", "OK");
-        }
+        await DisplayAlert("Thành công", "Đã thêm khách hàng thành công!", "OK");
+        await Navigation.PopAsync();
     }
 }

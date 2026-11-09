@@ -1,27 +1,16 @@
-﻿using System;
-using System.Collections.Generic;
 using System.ComponentModel;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using ManagerProduct.Model;
 
 namespace ManagerProduct.ViewModel
 {
-	public class ProductSelectable
+	public class ProductSelectable : INotifyPropertyChanged
 	{
-
 		public int Id { get; set; }
-
 		public double Price { get; set; }
-
-
 		public required int productID { get; set; }
-
 		public required Product product { get; set; }
 
 		private bool _isSelected;
-
 		public bool IsSelected
 		{
 			get => _isSelected;
@@ -33,7 +22,6 @@ namespace ManagerProduct.ViewModel
 					PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(nameof(IsSelected)));
 				}
 			}
-
 		}
 
 		private int _quantity;
@@ -45,14 +33,11 @@ namespace ManagerProduct.ViewModel
 				if (_quantity != value)
 				{
 					_quantity = value;
-					PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(nameof(IsSelected)));
+					PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(nameof(Quantity)));
 				}
 			}
-
 		}
 
-		public event PropertyChangedEventHandler PropertyChanged;
-
-
+		public event PropertyChangedEventHandler? PropertyChanged;
 	}
 }

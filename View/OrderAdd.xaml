@@ -2,38 +2,60 @@
 <ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              x:Class="ManagerProduct.View.OrderAdd"
-             Title="OrderAdd">
-    <VerticalStackLayout>
-        <Label 
-            Text="thêm hóa đơn"
-            VerticalOptions="Center" 
-            HorizontalOptions="Center" />
-
-        <StackLayout>
+             xmlns:vm="clr-namespace:ManagerProduct.ViewModel"
+             Title="Thêm hóa đơn mới"
+             BackgroundColor="#F5F5F5">
+    <Grid RowDefinitions="Auto,*,Auto" Padding="14" RowSpacing="10">
+        
+        <!-- Chọn khách hàng -->
+        <VerticalStackLayout Grid.Row="0" Spacing="4">
+            <Label Text="Khách hàng (*)" FontAttributes="Bold" FontSize="14" TextColor="#333333"/>
             <Picker x:Name="CustomerPicker"
-                    Title="Select Customer"
-                    ItemsSource="{Binding Customer}"
-                    ItemDisplayBinding="{Binding Name}" />
+                    Title="-- Chọn khách hàng --"
+                    ItemDisplayBinding="{Binding Name}" 
+                    BackgroundColor="White"/>
+        </VerticalStackLayout>
 
+        <!-- Danh sách sản phẩm chọn -->
+        <VerticalStackLayout Grid.Row="1" Spacing="4">
+            <Label Text="Chọn sản phẩm &amp; số lượng (*)" FontAttributes="Bold" FontSize="14" TextColor="#333333"/>
             <CollectionView x:Name="ProductPicker" 
-                            ItemsSource="{Binding product}"
-                            SelectionMode="Multiple">
+                            EmptyView="Chưa có sản phẩm nào trong kho">
                 <CollectionView.ItemTemplate>
-                    <DataTemplate>
-
-                        <StackLayout Orientation="Horizontal" Padding="10">
-                            <CheckBox IsChecked="{Binding IsSelected, Mode=TwoWay}" VerticalOptions="Center"/>
-                            <Label Text="{Binding product.Name}" FontSize="16" VerticalOptions="Center" WidthRequest="150"/>
-                            <Label Text="{Binding Price, StringFormat='Price: {0:C}'}" FontSize="16" VerticalOptions="Center" WidthRequest="100"/>
-                            <Entry Placeholder="Quantity" WidthRequest="80" Keyboard="Numeric" Text="{Binding Quantity, Mode=TwoWay}" />
-                        </StackLayout>
+                    <DataTemplate x:DataType="vm:ProductSelectable">
+                        <Frame BorderColor="#E0E0E0" CornerRadius="8" Padding="10" Margin="0,0,0,8" BackgroundColor="White">
+                            <Grid ColumnDefinitions="Auto,*,Auto,Auto" ColumnSpacing="8" VerticalOptions="Center">
+                                <CheckBox Grid.Column="0" IsChecked="{Binding IsSelected, Mode=TwoWay}" VerticalOptions="Center"/>
+                                <VerticalStackLayout Grid.Column="1" VerticalOptions="Center">
+                                    <Label Text="{Binding product.Name}" FontAttributes="Bold" FontSize="14" TextColor="#222222" LineBreakMode="TailTruncation"/>
+                                    <Label Text="{Binding Price, StringFormat='Giá: {0:N0} ₫'}" FontSize="12" TextColor="#2E86AB"/>
+                                    <Label Text="{Binding product.Stock, StringFormat='Còn: {0}'}" FontSize="12" TextColor="#777777"/>
+                                </VerticalStackLayout>
+                                <Label Grid.Column="2" Text="SL:" VerticalOptions="Center" FontSize="13" TextColor="#555555"/>
+                                <Entry Grid.Column="3" 
+                                       Placeholder="0" 
+                                       WidthRequest="60" 
+                                       Keyboard="Numeric" 
+                                       Text="{Binding Quantity, Mode=TwoWay}" 
+                                       VerticalOptions="Center"
+                                       HorizontalTextAlignment="Center"
+                                       BackgroundColor="#F0F0F0"/>
+                            </Grid>
+                        </Frame>
                     </DataTemplate>
                 </CollectionView.ItemTemplate>
             </CollectionView>
-            <Button x:Name="AddOrderButton"
-                      Text="Add Order"
-                 Clicked="AddOrderButton_Clicked"/>
+        </VerticalStackLayout>
 
-        </StackLayout>
-    </VerticalStackLayout>
+        <!-- Nút lưu đơn hàng -->
+        <Button Grid.Row="2"
+                x:Name="AddOrderButton"
+                Text="Xác nhận &amp; Lưu hóa đơn"
+                FontAttributes="Bold"
+                BackgroundColor="#007AFF"
+                TextColor="White"
+                CornerRadius="10"
+                Padding="12,12"
+                Clicked="AddOrderButton_Clicked"/>
+    </Grid>
 </ContentPage>

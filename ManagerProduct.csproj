@@ -1,4 +1,4 @@
-﻿<Project Sdk="Microsoft.NET.Sdk">
+<Project Sdk="Microsoft.NET.Sdk">
 
 	<PropertyGroup>
 		<TargetFrameworks>net8.0-android</TargetFrameworks>
@@ -78,9 +78,6 @@
 	</ItemGroup>
 
 	<ItemGroup>
-	  <MauiXaml Update="HomePage.xaml">
-	    <Generator>MSBuild:Compile</Generator>
-	  </MauiXaml>
 	  <MauiXaml Update="View\CustomerAdd.xaml">
 	    <Generator>MSBuild:Compile</Generator>
 	  </MauiXaml>

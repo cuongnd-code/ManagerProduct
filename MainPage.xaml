@@ -1,57 +1,87 @@
-﻿<?xml version="1.0" encoding="utf-8" ?>
+<?xml version="1.0" encoding="utf-8" ?>
 <ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              x:Class="ManagerProduct.MainPage"
-             ControlTemplate="{StaticResource BaseTemplate}"
-             >
-    <!-- trong scg o tren con co Dictionary ObservableCollection(tu dong thong bao khi du lieu thay doi) HashSet-->
-    <?HorizontalStackLayout la ngang?>
-<!--             xmlns:local="clr-namespace:MarkupExtensions" mac dinh tinh nhu la muon co font =18 hay gi do
-                 FontSize="{x:Static Member=local:AppConstants.NormalFontSize}" />
-   
-    
--->
+             Title="Tổng quan"
+             BackgroundColor="#F5F5F5">
     <ScrollView>
+        <VerticalStackLayout Spacing="16" Padding="16">
+            <!-- Header Banner -->
+            <Frame BackgroundColor="#1E293B" CornerRadius="16" Padding="16" HasShadow="True">
+                <VerticalStackLayout Spacing="4">
+                    <Label Text="Hệ thống Quản lý Bán hàng" FontAttributes="Bold" FontSize="18" TextColor="White"/>
+                    <Label Text="Quản lý kho hàng, khách hàng &amp; hóa đơn nội bộ (SQLite)" FontSize="13" TextColor="#94A3B8"/>
+                </VerticalStackLayout>
+            </Frame>
 
-
-        <VerticalStackLayout Spacing="15" Padding="20">
-
-            <Label x:Name="aaa"/>
-
-            <Grid>
-                <Grid.ColumnDefinitions>
-                    <ColumnDefinition Width="Auto"/>
-                    <ColumnDefinition Width="Auto"/>
-                    <ColumnDefinition Width="Auto"/>
-                    <ColumnDefinition Width="Auto"/>
-
-                </Grid.ColumnDefinitions>
-                <Grid.RowDefinitions>
-                    <RowDefinition Height="auto"/>
-                    <RowDefinition Height="auto"/>
-                    <RowDefinition Height="auto"/>
-                </Grid.RowDefinitions>
-
-
-                <Label x:Name="TotalOrder" Grid.Column="0" Grid.Row="0" Text="{Binding a}"/>
-                <Label x:Name="TotalRevene" Grid.Column="0" Grid.Row="1" Text="a"/>
-                <Label x:Name="a" Grid.Column="0" Grid.Row="2" Text="c"/>
-                <Button Grid.Column="0" Grid.Row="1" Text="productList" Clicked="Button_Clicked"/>
-                <Button Grid.Column="1" Grid.Row="1" Text="Customer List" Clicked="Button_Clicked1"/>
-                <Button Grid.Column="2" Grid.Row="1" Text="Order List" Clicked="OrderButton_Clicked"/>
-                <Button Grid.Column="3" Grid.Row="1" Text="zzz" Clicked="OrderButton_Clicked"/>
-
-                
-                
-
-            </Grid>
+            <!-- Dashboard Stats Cards -->
+            <Label Text="Thống kê hệ thống" FontAttributes="Bold" FontSize="16" TextColor="#333333"/>
             
-           
+            <Grid ColumnDefinitions="*,*" RowDefinitions="Auto,Auto" ColumnSpacing="12" RowSpacing="12">
+                <!-- Products Card -->
+                <Frame Grid.Row="0" Grid.Column="0" BackgroundColor="White" BorderColor="#E2E8F0" CornerRadius="12" Padding="14">
+                    <VerticalStackLayout Spacing="4">
+                        <Label Text="📦 Sản phẩm" FontSize="13" TextColor="#64748B" FontAttributes="Bold"/>
+                        <Label x:Name="TotalProductsLabel" Text="0" FontSize="22" FontAttributes="Bold" TextColor="#0F172A"/>
+                        <Label x:Name="LowStockLabel" Text="Hết hàng: 0" FontSize="11" TextColor="#EF4444"/>
+                    </VerticalStackLayout>
+                </Frame>
+
+                <!-- Customers Card -->
+                <Frame Grid.Row="0" Grid.Column="1" BackgroundColor="White" BorderColor="#E2E8F0" CornerRadius="12" Padding="14">
+                    <VerticalStackLayout Spacing="4">
+                        <Label Text="👥 Khách hàng" FontSize="13" TextColor="#64748B" FontAttributes="Bold"/>
+                        <Label x:Name="TotalCustomersLabel" Text="0" FontSize="22" FontAttributes="Bold" TextColor="#0F172A"/>
+                        <Label Text="Đã đăng ký" FontSize="11" TextColor="#10B981"/>
+                    </VerticalStackLayout>
+                </Frame>
+
+                <!-- Orders Card -->
+                <Frame Grid.Row="1" Grid.Column="0" BackgroundColor="White" BorderColor="#E2E8F0" CornerRadius="12" Padding="14">
+                    <VerticalStackLayout Spacing="4">
+                        <Label Text="🧾 Hóa đơn" FontSize="13" TextColor="#64748B" FontAttributes="Bold"/>
+                        <Label x:Name="TotalOrdersLabel" Text="0" FontSize="22" FontAttributes="Bold" TextColor="#0F172A"/>
+                        <Label Text="Đã hoàn thành" FontSize="11" TextColor="#3B82F6"/>
+                    </VerticalStackLayout>
+                </Frame>
+
+                <!-- Revenue Card -->
+                <Frame Grid.Row="1" Grid.Column="1" BackgroundColor="White" BorderColor="#E2E8F0" CornerRadius="12" Padding="14">
+                    <VerticalStackLayout Spacing="4">
+                        <Label Text="💰 Doanh thu" FontSize="13" TextColor="#64748B" FontAttributes="Bold"/>
+                        <Label x:Name="TotalRevenueLabel" Text="0 ₫" FontSize="16" FontAttributes="Bold" TextColor="#059669" LineBreakMode="TailTruncation"/>
+                        <Label Text="Tổng thực thu" FontSize="11" TextColor="#059669"/>
+                    </VerticalStackLayout>
+                </Frame>
+            </Grid>
+
+            <!-- Quick Action Shortcuts -->
+            <Label Text="Thao tác nhanh" FontAttributes="Bold" FontSize="16" TextColor="#333333" Margin="0,8,0,0"/>
+
+            <Button Text="📦 Quản lý Sản phẩm" 
+                    BackgroundColor="#2E86AB" 
+                    TextColor="White" 
+                    FontAttributes="Bold" 
+                    CornerRadius="10" 
+                    Padding="14,12" 
+                    Clicked="NavigateProduct_Clicked"/>
+
+            <Button Text="🧾 Quản lý Hóa đơn" 
+                    BackgroundColor="#007AFF" 
+                    TextColor="White" 
+                    FontAttributes="Bold" 
+                    CornerRadius="10" 
+                    Padding="14,12" 
+                    Clicked="NavigateOrder_Clicked"/>
+
+            <Button Text="👥 Quản lý Khách hàng" 
+                    BackgroundColor="#00838F" 
+                    TextColor="White" 
+                    FontAttributes="Bold" 
+                    CornerRadius="10" 
+                    Padding="14,12" 
+                    Clicked="NavigateCustomer_Clicked"/>
+
         </VerticalStackLayout> 
-        
-        
     </ScrollView>
-
-
-
 </ContentPage>

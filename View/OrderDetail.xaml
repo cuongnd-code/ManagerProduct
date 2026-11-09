@@ -2,27 +2,38 @@
 <ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              x:Class="ManagerProduct.View.OrderDetail"
-             Title="OrderDetail">
-    <VerticalStackLayout>
-            <Label Text="{Binding CustomerId}" x:Name="CustomerName"/>
-        <Label Text="{Binding OrderDate}" x:Name="Date"/>
-        <Label Text="{Binding TotalAmount}" x:Name="Totalamount"/>
+             xmlns:local="clr-namespace:ManagerProduct.Model"
+             Title="Chi tiết hóa đơn"
+             BackgroundColor="#F5F5F5">
+    <Grid RowDefinitions="Auto,*" Padding="14" RowSpacing="12">
+        <Frame Grid.Row="0" BorderColor="#E0E0E0" CornerRadius="12" Padding="14" BackgroundColor="White" HasShadow="True">
+            <VerticalStackLayout Spacing="6">
+                <Label Text="{Binding OrderId, StringFormat='Mã hóa đơn: #{0}'}" FontAttributes="Bold" FontSize="18" TextColor="#222222"/>
+                <Label Text="{Binding CustomerName, StringFormat='Khách hàng: {0}'}" FontSize="15" FontAttributes="Bold" TextColor="#004D40"/>
+                <Label Text="{Binding OrderDate, StringFormat='Thời gian lập: {0:dd/MM/yyyy HH:mm}'}" TextColor="#777777" FontSize="13"/>
+                <Label Text="{Binding TotalAmount, StringFormat='Tổng thanh toán: {0:N0} ₫'}" FontSize="17" FontAttributes="Bold" TextColor="#2E86AB"/>
+            </VerticalStackLayout>
+        </Frame>
 
-
-        <CollectionView x:Name="orderDetail" ItemsSource="{Binding OrderDetails}">
+        <CollectionView x:Name="orderDetail" 
+                        Grid.Row="1"
+                        ItemsSource="{Binding OrderDetails}"
+                        EmptyView="Không có sản phẩm trong đơn này">
+            <CollectionView.Header>
+                <Label Text="Danh sách mặt hàng đã mua:" FontAttributes="Bold" FontSize="15" TextColor="#333333" Margin="4,0,0,6"/>
+            </CollectionView.Header>
             <CollectionView.ItemTemplate>
-                <DataTemplate>
-                    <StackLayout Orientation="Horizontal" Padding="10">
-                        <Label Text="{Binding ProductName}" FontSize="16" VerticalOptions="Center" WidthRequest="150"/>
-                        <Label Text="{Binding UnitPrice, StringFormat='Price: {0:C}'}" FontSize="16" VerticalOptions="Center" WidthRequest="100"/>
-                        <Label Text="{Binding Quantity, StringFormat='Quantity: {0}'}" FontSize="16" VerticalOptions="Center" WidthRequest="100"/>
-                    </StackLayout>
+                <DataTemplate x:DataType="local:OrderDetailModel">
+                    <Frame BorderColor="#ECEFF1" CornerRadius="8" Padding="12" Margin="0,0,0,8" BackgroundColor="White">
+                        <Grid ColumnDefinitions="*,Auto" RowDefinitions="Auto,Auto">
+                            <Label Grid.Row="0" Grid.Column="0" Text="{Binding ProductName}" FontAttributes="Bold" FontSize="14" TextColor="#222222"/>
+                            <Label Grid.Row="1" Grid.Column="0" Text="{Binding UnitPrice, StringFormat='Đơn giá: {0:N0} ₫'}" FontSize="13" TextColor="#666666"/>
+                            <Label Grid.Row="0" Grid.Column="1" Text="{Binding Quantity, StringFormat='x{0}'}" FontAttributes="Bold" FontSize="14" TextColor="#2E86AB"/>
+                            <Label Grid.Row="1" Grid.Column="1" Text="{Binding TotalPrice, StringFormat='Thành tiền: {0:N0} ₫'}" FontSize="13" FontAttributes="Bold" TextColor="#222222"/>
+                        </Grid>
+                    </Frame>
                 </DataTemplate>
             </CollectionView.ItemTemplate>
-            
         </CollectionView>
-
-
-
-    </VerticalStackLayout>
+    </Grid>
 </ContentPage>

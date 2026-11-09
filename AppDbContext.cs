@@ -1,4 +1,3 @@
-﻿ 
 using ManagerProduct.Model;
 using Microsoft.EntityFrameworkCore;
 
@@ -11,23 +10,24 @@ namespace ManagerProduct
 		public DbSet<Order> Orders { get; set; }
 		public DbSet<OrderDetailModel> OrderDetails { get; set; }
 
-		public static string DbPath { get; } = System.IO.Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.LocalApplicationData), "products.db");
-		
-		public AppDbContext() {
-			//Database.EnsureDeleted();
+		public AppDbContext()
+		{
 			Database.EnsureCreated();
 		}
-		public AppDbContext(string path) { }
 
-
-		protected override void OnConfiguring(DbContextOptionsBuilder dbContextOptions) 
+		public AppDbContext(DbContextOptions<AppDbContext> options) : base(options)
 		{
-			const string FileName = "products.db";
-			dbContextOptions.UseSqlite($"Filename={System.IO.Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.LocalApplicationData), FileName)}");
-
-
+			Database.EnsureCreated();
 		}
-       
 
-    }
+		protected override void OnConfiguring(DbContextOptionsBuilder dbContextOptions)
+		{
+			if (!dbContextOptions.IsConfigured)
+			{
+				const string fileName = "products.db";
+				var dbPath = System.IO.Path.Combine(FileSystem.AppDataDirectory, fileName);
+				dbContextOptions.UseSqlite($"Filename={dbPath}");
+			}
+		}
+	}
 }
